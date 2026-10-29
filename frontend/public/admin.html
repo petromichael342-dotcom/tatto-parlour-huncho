@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>405INK Admin</title>
+<link rel="stylesheet" href="/assets/admin.css">
+</head>
+<body>
+<div id="app">
+  <header class="admin-header">
+    <strong>405INK Admin</strong>
+    <button id="logout">Log out</button>
+  </header>
+
+  <section id="login-view">
+    <form id="login-form" class="card" style="max-width:420px;margin:80px auto;">
+      <h2>Admin login</h2>
+      <label>Email<input type="email" id="login-email" autocomplete="username" required></label>
+      <label>Password<input type="password" id="login-pass" autocomplete="current-password" required></label>
+      <button type="submit">Sign in</button>
+      <div id="login-error" class="err" hidden></div>
+    </form>
+  </section>
+
+  <section id="main-view" hidden>
+    <nav class="tabs">
+      <button data-tab="bookings" class="active">Bookings</button>
+      <button data-tab="methods">Payment methods</button>
+      <button data-tab="artists">Artists</button>
+    </nav>
+
+    <div id="tab-bookings" class="tab-panel">
+      <div class="toolbar">
+        <input type="search" id="bk-search" placeholder="Search ref / name / email">
+        <select id="bk-status">
+          <option value="">All statuses</option>
+          <option>pending</option><option>approved</option>
+          <option>scheduled</option><option>completed</option>
+          <option>cancelled</option>
+        </select>
+      </div>
+      <div id="bk-list"></div>
+    </div>
+
+    <div id="tab-methods" class="tab-panel" hidden>
+      <div class="card">
+        <h3>Global settings</h3>
+        <label style="display:flex;gap:12px;align-items:center;">
+          Minimum deposit ($)
+          <input type="number" id="pm-global-min" min="0" step="1" style="max-width:140px;">
+          <button id="pm-global-min-save">Save</button>
+        </label>
+      </div>
+
+      <div class="card">
+        <h3>Add payment method</h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <input id="pm-new-key"   placeholder="key (lowercase)" style="max-width:180px;">
+          <input id="pm-new-label" placeholder="Label"           style="max-width:220px;">
+          <button id="pm-add">Add</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Methods</h3>
+        <div id="pm-list"></div>
+      </div>
+    </div>
+
+    <div id="tab-artists" class="tab-panel" hidden>
+      <div class="card">
+        <h3>Add artist</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <input id="ar-new-name"      placeholder="Name">
+          <input id="ar-new-slug"      placeholder="slug (lowercase)">
+          <input id="ar-new-specialty" placeholder="Specialty">
+          <input id="ar-new-image"     placeholder="Image URL">
+          <input id="ar-new-portfolio" placeholder="Portfolio / booking URL (optional)">
+          <input id="ar-new-instagram" placeholder="Instagram handle">
+        </div>
+        <button id="ar-add" style="margin-top:12px;">Add artist</button>
+      </div>
+
+      <div class="card">
+        <h3>Artists</h3>
+        <div id="ar-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="drawer-backdrop" class="backdrop" hidden></div>
+  <aside id="drawer" class="drawer" hidden>
+    <div class="drawer-header">
+      <strong id="drawer-title">Booking</strong>
+      <button id="drawer-close">✕</button>
+    </div>
+    <div id="drawer-body" class="drawer-body"></div>
+  </aside>
+
+  <div id="toast" class="toast" hidden></div>
+</div>
+
+<script src="/assets/admin.js" type="module"></script>
+</body>
+</html>
